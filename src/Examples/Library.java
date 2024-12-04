@@ -2,7 +2,7 @@ package Examples;
 
 import java.util.Scanner;
 
-class Library {
+public class Library {
 
     // ***** Scanner ***********************************//
     public static Scanner input = new Scanner(System.in);
