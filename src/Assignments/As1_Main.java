@@ -45,13 +45,11 @@ public class As1_Main {
                     System.out.println("Error: Crop not found");
                 } else {
                     allCrops.get(i).printMe();
+                    System.out.println("Do you want to harvest the crop?");
+                    if(Library.input.nextLine().equals("y")){
+                        totalRevenue += allCrops.get(i).harvest();
+                    }
                 }
-
-                System.out.println("Do you want to harvest the crop?");
-                if(Library.input.nextLine().equals("y")){
-                    totalRevenue = allCrops.get(i).harvest();
-                }
-
             }
 
             if (choice == 3) {
@@ -59,10 +57,34 @@ public class As1_Main {
             }
 
             if (choice == 4) {
+                System.out.println("What crop do you want to plant?");
+                String crop = Library.input.nextLine();
+                System.out.println("How many acres do you want to plant?");
+                int acres = Library.input.nextInt();
+                Library.input.nextLine();
+
+                if(searchByName(allCrops, crop) == -1) {
+                    System.out.println("What is the yield");
+                    double yield = Library.input.nextDouble();
+                    Library.input.nextLine();
+
+                    System.out.println("What units are you using?");
+                    String units = Library.input.nextLine();
+
+                    System.out.println("What is the price?");
+                    double price = Library.input.nextDouble();
+                    Library.input.nextLine();
+
+                    allCrops.add(new As1_Crop(crop, yield, units, price));
+                    allCrops.get(searchByName(allCrops, crop)).setAcres(acres);
+                } else {
+                    allCrops.get(searchByName(allCrops, crop)).addAcres(acres);
+                }
+            }
+
+            if(choice == 5) {
                 break;
             }
-            System.out.println();
-
         }
     }
 

@@ -27,6 +27,8 @@ public class As1_Crop {
         this.acres = acres;
     }
 
+    public void addAcres(int acres) {this.acres += acres;}
+
     public String getName() {
         return name;
     }
@@ -37,4 +39,6 @@ public class As1_Crop {
         acres = 0;
         return total;
     }
+
+
 }
