@@ -10,6 +10,12 @@ public class As3_LeagueMain {
         ArrayList<As3_Team> team = new ArrayList<>();
 
         loadFile("data/teams.csv", team);
+        team.get(3).addPlayer("Draisaitl", 20);
+        team.get(3).addPlayer("McDavid", 14);
+        team.get(3).addPlayer("Bouchard", 6);
+        team.get(3).addPlayer("Nugent-Hopkins", 4);
+        team.get(3).addPlayer("Hyman", 5);
+
 
         while(true) {
 

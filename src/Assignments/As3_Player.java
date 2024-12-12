@@ -5,9 +5,9 @@ public class As3_Player {
     private int id;
     private int goals;
 
-    public As3_Player(String n, int i, int g) {
+    public As3_Player(String n, int g) {
         name = n;
-        id = i;
+//        id = i;
         goals = g;
     }
 

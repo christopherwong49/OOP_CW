@@ -21,8 +21,8 @@ public class As3_Team {
         gamesPlayed = g;
     }
 
-    public void addPlayer(String n, int i, int g) {
-        Players.add(new As3_Player(n, i, g));
+    public void addPlayer(String n, int g) {
+        Players.add(new As3_Player(n, g));
     }
 
    public void printMe() {
