@@ -7,66 +7,95 @@ import java.io.*;
 
 public class As3_LeagueMain {
     public static void run() {
-        ArrayList<As3_Team> team = new ArrayList<>();
+        ArrayList<As3_Team> teams = new ArrayList<>();
 
-        loadFile("data/teams.csv", team);
-        team.get(3).addPlayer("Draisaitl", 20);
-        team.get(3).addPlayer("McDavid", 14);
-        team.get(3).addPlayer("Bouchard", 6);
-        team.get(3).addPlayer("Nugent-Hopkins", 4);
-        team.get(3).addPlayer("Hyman", 5);
+        loadFile("data/teams.csv", teams);
+
+        teams.get(0).addPlayer("Dach",77,2);
+        teams.get(0).addPlayer("Caufield",13,17);
+
+        teams.get(1).addPlayer("Tkachuk",7,14);
+        teams.get(1).addPlayer("Stuzle", 18, 10);
+
+        teams.get(2).addPlayer("Marchand",63,12);
+        teams.get(2).addPlayer("Zacha",18,7);
+
+        teams.get(3).addPlayer("Draisaitl",29,20);
+        teams.get(3).addPlayer("McDavid",97,14);
+        teams.get(3).addPlayer("Bouchard",2,6);
+        teams.get(3).addPlayer("Nugent-Hopkins",93,4);
+        teams.get(3).addPlayer("Hyman",18,5);
+
+        teams.get(4).addPlayer("Tavares",91,12);
+        teams.get(4).addPlayer("Matthews",34,9);
+
+        teams.get(5).addPlayer("Kucherov",86,14);
+        teams.get(5).addPlayer("Guentzal",59,16);
+
+        teams.get(6).addPlayer("Huberdeau",10,11);
+        teams.get(6).addPlayer("Lomberg",70,0);
+
+        teams.get(7).addPlayer("Connor",18,16);
+        teams.get(7).addPlayer("Scheifele",55,16);
+
+        teams.get(8).addPlayer("Pettersson",40,8);
+        teams.get(8).addPlayer("Miller",9,6);
+
+        teams.get(9).addPlayer("Lewis",61,3);
+        teams.get(9).addPlayer("Turcotte",15,2);
 
 
         while(true) {
 
-            System.out.println("Press 1 to print list of teams\nPress 2 to for average\nPress 3 for division\nPress 4 to sort by wins\nPress 5 to enter game info\nPress 6 to save and exit");
+            System.out.println("Press 1 to print list of teams\nPress 2 to for average\nPress 3 for division\nPress 4 to sort by wins\nPress 5 to enter game info");
+            System.out.println("Press 6 to print players\nPress 7 for total goals\nPress 8 to update players stats\nPress 9 to save and exit");
 
             int choice = Library.input.nextInt();
             Library.input.nextLine();
 
             if (choice == 1) {
                 System.out.printf("%-15s %-15s %-15s %-10s %-10s %-10s\n", "Team", "City", "Division", "W", "OTL", "Games");
-                for (int i = 0; i < team.size(); i++) {
-                    team.get(i).printMe();
+                for (int i = 0; i < teams.size(); i++) {
+                    teams.get(i).printMe();
                 }
             }
             if (choice == 2) {
                 double a1, a2, a3;
                 a1 = a2 = a3 = 0;
-                for (int i = 0; i < team.size(); i++) {
-                    a1 += team.get(i).getWins();
-                    a2 += team.get(i).getOtLosses();
-                    a3 += team.get(i).getGamesPlayed();
+                for (int i = 0; i < teams.size(); i++) {
+                    a1 += teams.get(i).getWins();
+                    a2 += teams.get(i).getOtLosses();
+                    a3 += teams.get(i).getGamesPlayed();
                 }
-                System.out.println("Average Wins: " + a1/team.size() + "\nAverage Overtime Losses: " + a2/ team.size() + "\nAverage Games Played: " + a3/ team.size());
+                System.out.println("Average Wins: " + a1/teams.size() + "\nAverage Overtime Losses: " + a2/ teams.size() + "\nAverage Games Played: " + a3/ teams.size());
             }
             if (choice == 3) {
                 System.out.println("Input Division");
                 String division = Library.input.nextLine();
                 System.out.printf("%-15s %-15s %-15s %-10s %-10s %-10s\n", "Team", "City", "Division", "W", "OTL", "Games");
-                for (int i = 0; i < team.size(); i++) {
-                    if(team.get(i).getDivision().equals(division)) {
-                        team.get(i).printMe();
+                for (int i = 0; i < teams.size(); i++) {
+                    if(teams.get(i).getDivision().equals(division)) {
+                        teams.get(i).printMe();
                     }
                 }
             }
 
             if(choice == 4){
-                for(int i=0; i< team.size()-1; i++){
+                for(int i=0; i< teams.size()-1; i++){
                     int lowestIndex = i;
-                    for(int j=i+1; j< team.size(); j++){
-                        if(team.get(j).getWins() < team.get(lowestIndex).getWins()){
+                    for(int j=i+1; j< teams.size(); j++){
+                        if(teams.get(j).getWins() < teams.get(lowestIndex).getWins()){
                             lowestIndex = j;
                         }
                     }
-                    As3_Team temp = team.get(i);
-                    team.set(i, team.get(lowestIndex));
-                    team.set(lowestIndex, temp);
+                    As3_Team temp = teams.get(i);
+                    teams.set(i, teams.get(lowestIndex));
+                    teams.set(lowestIndex, temp);
                 }
 
                 System.out.printf("%-15s %-15s %-15s %-10s %-10s %-10s\n", "Team", "City", "Division", "W", "OTL", "Games");
-                for (int i = 0; i < team.size(); i++) {
-                    team.get(i).printMe();
+                for (int i = 0; i < teams.size(); i++) {
+                    teams.get(i).printMe();
                 }
             }
 
@@ -80,24 +109,61 @@ public class As3_LeagueMain {
                 System.out.println("Did the game go to overtime");
                 boolean ot = Library.input.nextBoolean();
 
-                for (int i = 0; i < team.size(); i++) {
-                    if(w.equals(team.get(i).getName())){
-                        team.get(i).setWins( team.get(i).getWins() + 1);
-                        team.get(i).setGamesPlayed( team.get(i).getGamesPlayed() + 1);
+                for (int i = 0; i < teams.size(); i++) {
+                    if(w.equals(teams.get(i).getName())){
+                        teams.get(i).setWins( teams.get(i).getWins() + 1);
+                        teams.get(i).setGamesPlayed( teams.get(i).getGamesPlayed() + 1);
                     }
 
-                    if(l.equals(team.get(i).getName())) {
-                        team.get(i).setGamesPlayed( team.get(i).getGamesPlayed() + 1);
+                    if(l.equals(teams.get(i).getName())) {
+                        teams.get(i).setGamesPlayed( teams.get(i).getGamesPlayed() + 1);
 
                         if(ot) {
-                            team.get(i).setOtLosses( team.get(i).getOtLosses() + 1);
+                            teams.get(i).setOtLosses( teams.get(i).getOtLosses() + 1);
                         }
                     }
                 }
             }
 
-            if (choice == 6) {
-                saveFile("data/teams.csv", team);
+            if(choice == 6) {
+                System.out.println("Input team");
+                String team = Library.input.nextLine();
+
+                for (int i = 0; i < teams.size(); i++) {
+                    if(team.equals(teams.get(i).getName())) {
+                        teams.get(i).printMyPlayers();
+                    }
+                }
+            }
+
+
+            if(choice == 7) {
+                System.out.printf("%-15s %-15s\n", "Team", "Goals");
+                for (int i = 0; i < teams.size(); i++) {
+                    System.out.printf("%-15s %-15s\n", teams.get(i).getName(), teams.get(i).goals());
+                }
+            }
+
+            if(choice == 8) {
+                System.out.println("Input team");
+                String team = Library.input.nextLine();
+
+                System.out.println("Input player");
+                String player = Library.input.nextLine();
+
+                System.out.println("Input goals");
+                int goals = Library.input.nextInt();
+                Library.input.nextLine();
+
+                for (int i = 0; i < teams.size(); i++) {
+                    if(team.equals(teams.get(i).getName())) {
+                        teams.get(i).updatePlayerStats(player, goals);
+                    }
+                }
+            }
+
+            if (choice == 9) {
+                saveFile("data/teams.csv", teams);
                 break;
             }
             System.out.println();
@@ -133,9 +199,9 @@ public class As3_LeagueMain {
                 toSave = tempList.get(i).getName();  //assumes getter method are used for private variables
                 toSave +="," + tempList.get(i).getCity();
                 toSave += "," + tempList.get(i).getDivision();
+                toSave +="," + tempList.get(i).getGamesPlayed();
                 toSave +="," + tempList.get(i).getWins();
                 toSave +="," + tempList.get(i).getOtLosses();
-                toSave +="," + tempList.get(i).getGamesPlayed();
 
                 file.println(toSave);
 

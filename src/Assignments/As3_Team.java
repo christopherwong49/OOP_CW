@@ -9,10 +9,10 @@ public class As3_Team {
     private int wins;
     private int otLosses;
     private int gamesPlayed;
-    private ArrayList <As3_Player> Players = new ArrayList<>();
+    private ArrayList <As3_Player> players = new ArrayList<>();
 
 
-    public As3_Team(String n, String c, String d, int w, int o, int g) {
+    public As3_Team(String n, String c, String d, int g, int w, int o) {
         name = n;
         city = c;
         division = d;
@@ -21,8 +21,8 @@ public class As3_Team {
         gamesPlayed = g;
     }
 
-    public void addPlayer(String n, int g) {
-        Players.add(new As3_Player(n, g));
+    public void addPlayer(String n, int i, int g) {
+        players.add(new As3_Player(n, i, g));
     }
 
    public void printMe() {
@@ -63,5 +63,28 @@ public class As3_Team {
 
     public void setGamesPlayed(int gamesPlayed) {
         this.gamesPlayed = gamesPlayed;
+    }
+
+    public void printMyPlayers() {
+        System.out.printf("%-15s %-15s %-15s\n", "Name", "Number", "Goals");
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).printMe();
+        }
+    }
+
+    public int goals() {
+        int goals = 0;
+        for (int i = 0; i < players.size(); i++) {
+            goals += players.get(i).getGoals();
+        }
+        return goals;
+    }
+
+    public void updatePlayerStats(String p, int g) {
+        for (int i = 0; i < players.size(); i++) {
+            if(p.equals(players.get(i).getName())) {
+                players.get(i).updateStat(g);
+            }
+        }
     }
 }
